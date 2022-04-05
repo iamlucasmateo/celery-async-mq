@@ -1,0 +1,5 @@
+pytest
+aiofiles
+pillow
+celery
+requests

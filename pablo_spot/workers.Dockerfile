@@ -5,11 +5,9 @@ WORKDIR /usr/src
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
 
-COPY ./requirements.txt /usr/src/requirements.txt
-
+COPY ./requirements-workers.txt requirements.txt
 RUN set -eux \
     && apk add --no-cache --virtual .build-deps build-base \
-    libressl-dev libffi-dev gcc musl-dev python3-dev \
     libressl-dev libffi-dev gcc musl-dev python3-dev \
     tiff-dev jpeg-dev openjpeg-dev zlib-dev freetype-dev lcms2-dev \
     libwebp-dev tcl-dev tk-dev harfbuzz-dev fribidi-dev libimagequant-dev \
@@ -18,5 +16,8 @@ RUN set -eux \
     && pip install -r /usr/src/requirements.txt \
     && rm -rf /root/.cache/pip
 
-COPY ./app/ /usr/src/app/
-COPY ./tests/ /usr/src/tests
+RUN mkdir -p /tmp/static
+
+COPY ./entities/ /usr/src/entities/
+COPY ./workers/ /usr/src/workers/
+COPY ./tests/ /usr/src/tests/

@@ -6,7 +6,7 @@ from typing import Optional
 from wonderwords import RandomWord
 from fastapi.staticfiles import StaticFiles
 
-from .thumbnail_maker import create
+from app.thumbnail_maker import create
 
 STATIC_DIR = os.environ.get("STATIC_DIR", "/tmp/static")
 
